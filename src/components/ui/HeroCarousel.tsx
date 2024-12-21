@@ -1,42 +1,19 @@
-import * as React from "react";
-import Autoplay from "embla-carousel-autoplay";
-
-import { Card, CardContent } from "@/components/ui/card";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
 import { carouselData } from "@/mockdata/data";
+import { Carousel } from "flowbite-react";
 
-export function HeroCarouesel() {
-  const plugin = React.useRef(
-    Autoplay({ delay: 2000, stopOnInteraction: true })
-  );
+export function HeroCarousel() {
   const data = carouselData;
   return (
-    <Carousel
-      plugins={[plugin.current]}
-      opts={{ loop: true }}
-      className="w-[80%] mx-auto mx-h-10 cursor-handler"
-      onMouseEnter={plugin.current.stop}
-      onMouseLeave={plugin.current.reset}
-    >
-      <CarouselContent>
+    <div className="h-56 sm:h-64 xl:h-80 2xl:h-96">
+      <Carousel slideInterval={5000}>
         {data.map((item) => (
-          <CarouselItem key={item.id}>
-            <img
-              src={item.imageSrc}
-              alt={`Carousel item ${item.id}`}
-              onError={(e) => (e.currentTarget.style.display = "none")}
-            />
-          </CarouselItem>
+          <img
+            src={item.imageSrc}
+            key={item.id}
+            className="object-cover w-full h-full"
+          />
         ))}
-      </CarouselContent>
-      <CarouselPrevious />
-      <CarouselNext />
-    </Carousel>
+      </Carousel>
+    </div>
   );
 }

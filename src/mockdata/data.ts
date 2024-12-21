@@ -1,28 +1,78 @@
 export const carouselData = [
   {
     id: 1,
-    imageSrc:
-      "https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    imageSrc: "/car1.jpg",
   },
   {
     id: 2,
-    imageSrc:
-      "https://plus.unsplash.com/premium_photo-1664202526559-e21e9c0fb46a?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    imageSrc: "/car2.jpg",
   },
 
   {
     id: 3,
-    imageSrc:
-      "https://images.unsplash.com/photo-1506152983158-b4a74a01c721?q=80&w=1473&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    imageSrc: "/car3.jpg",
   },
   {
     id: 4,
-    imageSrc:
-      "https://plus.unsplash.com/premium_photo-1683817138481-dcdf64a40859?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    imageSrc: "/car4.jpg",
   },
   {
     id: 5,
-    imageSrc:
-      "https://images.unsplash.com/photo-1484327973588-c31f829103fe?q=80&w=1473&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    imageSrc: "car5.jpg",
+  },
+];
+
+export const discountData = [
+  { id: 1, photo: "/fash1.jpg", title: "Fashion Blouse", price: 22.42 },
+  { id: 2, photo: "/fash2.jpg", title: "Fashion Top", price: 56.86 },
+  { id: 3, photo: "/fash3.jpg", title: "Fashion Pant", price: 22.42 },
+  { id: 4, photo: "/fash4.jpg", title: "Fashion Bikini", price: 22.42 },
+  { id: 5, photo: "/fash5.jpg", title: "Fashion Blouse", price: 22.42 },
+];
+
+export const productData = [
+  {
+    id: 1,
+    photo: "/prod1.jpg",
+    title: "Fashion Blouse",
+    price: 22.42,
+    category: "Fashion",
+  },
+  {
+    id: 2,
+    photo: "/prod2.jpg",
+    title: "Fashion Top",
+    price: 56.86,
+    category: "Fashion",
+  },
+  {
+    id: 3,
+    photo: "/prod3.jpg",
+    title: "Fashion Pant",
+    price: 22.42,
+  },
+  {
+    id: 4,
+    photo: "/prod4.jpg",
+    title: "Fashion Bikini",
+    price: 22.42,
+  },
+  {
+    id: 5,
+    photo: "/prod5.jpg",
+    title: "Fashion Blouse",
+    price: 22.42,
+  },
+  {
+    id: 6,
+    photo: "/prod6.jpg",
+    title: "Fashion Top",
+    price: 56.86,
+  },
+  {
+    id: 7,
+    photo: "/prod7.jpg",
+    title: "Fashion Pant",
+    price: 22.42,
   },
 ];
