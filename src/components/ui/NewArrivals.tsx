@@ -3,29 +3,51 @@ import React from "react";
 
 const NewArrivals = () => {
   return (
-    <div className="px-8 pt-6">
+    <div className="px-8 pt-4">
       <span className="font-bold text-[#db4444] flex " dir="rtl">
-        <div className="border border-[8px] gap-10 border-[#db4444] rounded-sm mx-2 h-7"></div>
+        <div className="border-[8px] gap-10 border-[#db4444] rounded-sm mx-2 h-6"></div>
         <span className="">برترین ها</span>
       </span>
       <span
-        className="text-2xl text-black font-extrabold py-[10px] flex gap-10"
+        className="text-2xl text-black font-extrabold py-[8px] flex gap-10"
         dir="rtl"
       >
         <span className="ml-20">تازه ترین ها</span>
       </span>
 
-      <div className="w-[90%] mx-auto justify-between gap-5">
-        <img
-          className="relative"
-          style={{ backgroundImage: "url('/last2.jpg')" }}
-        >
-          <div className="absolute bg-black opacity-60"></div>
-          <div className="absolute inset-0 flex items-center justify-center">
-            <span className="text-white text-5xl font-bold">تازه ترین ها</span>
+      <div className="w-[90%] mx-auto flex gap-5 h-1/2">
+        <div className="flex-1">
+          <img
+            className="w-full h-1/2 object-cover"
+            src="/last2.jpg"
+            alt="Last 2"
+          />
+        </div>
+        <div className="flex-1 flex flex-col">
+          <div className="flex-1">
+            <img
+              src="/last1.jpg"
+              alt="Last 1"
+              className="w-full h-1/4 object-cover"
+            />
+            <div className="flex-1 flex gap-5 pt-4 h-1/2 ">
+              <div className="flex-1 ">
+                <img
+                  src="/last3.jpg"
+                  alt="Last 3"
+                  className="w-full h-1/2 object-cover"
+                />
+              </div>
+              <div className="flex-1 ">
+                <img
+                  src="/last4.jpg"
+                  alt="Last 4"
+                  className="w-full h-1/2 object-cover"
+                />
+              </div>
+            </div>
           </div>
-        </img>
-        <div>Hello</div>
+        </div>
       </div>
     </div>
   );
