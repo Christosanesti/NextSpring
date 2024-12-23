@@ -8,7 +8,7 @@ const CategoryCarousel = () => {
   return (
     <div className="px-8 pt-6">
       <span className="font-bold text-[#db4444] flex " dir="rtl">
-        <div className="border border-[8px] gap-10 border-[#db4444] rounded-sm mx-2 h-7"></div>
+        <div className="border-[8px] gap-10 border-[#db4444] rounded-sm mx-2 h-7"></div>
         <span className="">دسته بندی ها</span>
       </span>
       <span

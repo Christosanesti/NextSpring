@@ -27,7 +27,7 @@ const FeaturedBanner = () => {
               <span className="mx-1">16</span>
             </span>
           </div>
-          <button className="mt-4 px-5  bg-[#ed4444] hover:bg-red-600 text-white font-semibold py-2 px-4 rounded">
+          <button className="mt-4  bg-[#ed4444] hover:bg-red-600 text-white font-semibold py-2 px-4 rounded">
             خرید
           </button>
         </div>

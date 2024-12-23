@@ -1,39 +1,66 @@
-import Image from "next/image";
-import Link from "next/link";
-import React from "react";
-import { Input } from "@/components/ui/input";
-import { Heart, ShoppingBag } from "lucide-react";
+import type { CustomFlowbiteTheme } from "flowbite-react";
 
-const Navbar = () => {
+import { Input, InputAdornment, OutlinedInput } from "@mui/material";
+import NativeSelectInput from "@mui/material/NativeSelect/NativeSelectInput";
+import {
+  Avatar,
+  Dropdown,
+  DropdownDivider,
+  DropdownHeader,
+  DropdownItem,
+  Navbar,
+  NavbarBrand,
+  NavbarCollapse,
+  NavbarLink,
+  NavbarToggle,
+} from "flowbite-react";
+import SearchInput from "./SearchInput";
+
+export function NavbarComp() {
   return (
-    <nav
-      className="flex flex-row justify-between shadow-md py-4 px-6 sticky"
-      dir="rtl"
-    >
-      <Link href={"/"} className="font-bold text-lg gap-2 flex justify-between">
-        <Image
-          src={"/logo.avif"}
-          alt="logo"
-          width={40}
-          height={40}
-          className="scale-x-[-1] "
+    <Navbar fluid rounded dir="rtl" className="shadow-xl py-5">
+      <NavbarBrand href="/">
+        <img
+          src="/logo.avif"
+          className="mr-3 h-6 sm:h-9 scale-x-[-1]"
+          alt="ننه مریم"
         />
-        <span className="p-2">ننه مریم</span>{" "}
-      </Link>
-      <div className="flex gap-7 text-black p-2">
-        <Link href={"/about"}>درباره من</Link>
-        <Link href={"/Home"}> صفحه اصلی</Link>
-        <Link href={"/register"}>ثبت نام</Link>
-        <Link href={"/collection"}>محصولات</Link>
+        <span className="self-center whitespace-nowrap text-xl font-semibold px-5 dark:text-white">
+          ننه مریم
+        </span>
+      </NavbarBrand>
+      <div className="flex md:order-2">
+        <Dropdown
+          arrowIcon={false}
+          inline
+          label={<Avatar alt="User settings" img="/logo.avif" rounded />}
+        >
+          <DropdownHeader>
+            <span className="block text-sm">نام</span>
+            <span className="block truncate text-sm font-medium">
+              name@nane.com
+            </span>
+          </DropdownHeader>
+          <DropdownItem>صفحه اصلی</DropdownItem>
+          <DropdownItem>تنظیمات</DropdownItem>
+          <DropdownItem>فروش</DropdownItem>
+          <DropdownDivider />
+          <DropdownItem>خروج</DropdownItem>
+        </Dropdown>
+        <NavbarToggle />
       </div>
-
-      <div className="flex p-2 gap-4">
-        <Input type="search" placeholder={`جستجو...`} />
-        <Heart size={30} />
-        <ShoppingBag size={30} />
-      </div>
-    </nav>
+      <div></div>
+      <SearchInput />
+      <NavbarCollapse>
+        <NavbarLink href="#"></NavbarLink>
+        <NavbarLink href="#" active>
+          صفحه اصلی
+        </NavbarLink>
+        <NavbarLink href="#">درباره من</NavbarLink>
+        <NavbarLink href="#">خدمات</NavbarLink>
+        <NavbarLink href="#">کالاها</NavbarLink>
+        <NavbarLink href="#">ورود</NavbarLink>
+      </NavbarCollapse>
+    </Navbar>
   );
-};
-
-export default Navbar;
+}
