@@ -12,72 +12,36 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
-import { PlusCircle, ShoppingCart } from "lucide-react"; // Add this import for the cart icon
+import { PlusCircle, ShoppingCart } from "lucide-react";
+import { products } from "@/mockdata/data";
+// Import MUI Button
+import { Button as MuiButton } from "@mui/material";
+interface ProductProps {
+  id: number;
+  image: string;
+  title: string;
+  price: number;
+  rating: number;
+  reviews: number;
+  // Change the type to string
+}
 
-export default function Filter() {
+export default function Filter(props: ProductProps) {
   const [selectedFilters, setSelectedFilters] = useState({
     category: [],
     priceRange: [0, 200],
     rating: 0,
   });
   const [sortBy, setSortBy] = useState("price");
-  const products = [
-    {
-      id: 1,
-      image: "/car1.jpg",
-      title: "Wireless Headphones",
-      price: 79.99,
-      rating: 4.5,
-      reviews: 120,
-    },
-    {
-      id: 2,
-      image: "/fash1.jpg",
-      title: "Leather Backpack",
-      price: 99.99,
-      rating: 4.2,
-      reviews: 85,
-    },
-    {
-      id: 3,
-      image: "/car5.jpg",
-      title: "Fitness Tracker",
-      price: 49.99,
-      rating: 4.7,
-      reviews: 200,
-    },
-    {
-      id: 4,
-      image: "/car2.jpg",
-      title: "Portable Bluetooth Speaker",
-      price: 59.99,
-      rating: 4.3,
-      reviews: 150,
-    },
-    {
-      id: 5,
-      image: "/fash3.jpg",
-      title: "Ergonomic Office Chair",
-      price: 199.99,
-      rating: 4.6,
-      reviews: 95,
-    },
-    {
-      id: 6,
-      image: "/fash4.jpg",
-      title: "Smart Home Hub",
-      price: 89.99,
-      rating: 4.4,
-      reviews: 110,
-    },
-  ];
+  // New state for controlling the number of displayed products
+  const [displayCount, setDisplayCount] = useState(15);
 
   const filteredProducts = useMemo(() => {
     return products
       .filter((product) => {
         if (
           selectedFilters.category.length > 0 &&
-          !selectedFilters.category.includes(product.category)
+          !selectedFilters.category.includes(product.category as never)
         ) {
           return false;
         }
@@ -101,17 +65,21 @@ export default function Filter() {
       });
   }, [selectedFilters, sortBy]);
 
-  const handleFilterChange = (type, value) => {
+  const handleFilterChange = (type: string, value: unknown) => {
     setSelectedFilters((prev) => ({
       ...prev,
       [type]: value,
     }));
   };
 
-  const handleSortChange = (value) => {
+  const handleSortChange = (value: string) => {
     setSortBy(value);
   };
 
+  // Function to handle "Show More" button click
+  const handleShowMore = () => {
+    setDisplayCount((prevCount) => prevCount + 15);
+  };
   return (
     <div className="container mx-auto grid grid-cols-1 md:grid-cols-[1fr_300px] gap-8 p-4 md:p-8">
       <div>
@@ -146,7 +114,7 @@ export default function Filter() {
           </DropdownMenu>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredProducts.map((product) => (
+          {filteredProducts.slice(0, displayCount).map((product) => (
             <div
               dir="rtl"
               key={product.id}
@@ -192,6 +160,18 @@ export default function Filter() {
             </div>
           ))}
         </div>
+
+        {filteredProducts.length > displayCount && (
+          <div className="mt-8 text-center">
+            <MuiButton
+              variant="contained"
+              color="primary"
+              onClick={handleShowMore}
+            >
+              نمایش بیشتر
+            </MuiButton>
+          </div>
+        )}
       </div>
       <div className="bg-background rounded-lg shadow-sm p-6" dir="rtl">
         <h2 className="text-lg font-semibold mb-4">فیلتر</h2>
@@ -205,7 +185,9 @@ export default function Filter() {
                   className="flex items-center gap-2 font-normal"
                 >
                   <Checkbox
-                    checked={selectedFilters.category.includes(category)}
+                    checked={selectedFilters.category.includes(
+                      category as never
+                    )}
                     onCheckedChange={(checked) => {
                       if (checked) {
                         handleFilterChange("category", [
@@ -264,7 +246,7 @@ export default function Filter() {
   );
 }
 
-function ListOrderedIcon(props) {
+function ListOrderedIcon(props: any) {
   return (
     <svg
       {...props}
@@ -288,7 +270,7 @@ function ListOrderedIcon(props) {
   );
 }
 
-function StarIcon(props) {
+function StarIcon(props: any) {
   return (
     <svg
       {...props}
