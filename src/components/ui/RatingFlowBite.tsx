@@ -3,7 +3,7 @@ import { Rating, RatingAdvanced, RatingStar } from "flowbite-react";
 export default function RatingFlowBite() {
   return (
     <div dir="rtl" className="px-10">
-      <Rating className="my-2 ">
+      <Rating className="my-2">
         <RatingStar />
         <RatingStar />
         <RatingStar />

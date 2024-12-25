@@ -17,7 +17,7 @@ export default function CommentSlider() {
         align: "start",
       }}
       orientation="vertical"
-      className="w-full max-w-full mx-auto my-12"
+      className="w-full max-w-full mx-auto my-[5rem]"
     >
       <CarouselContent className="-mt-1 h-[300px] py-10">
         {Array.from({ length: 5 }).map((_, index) => (

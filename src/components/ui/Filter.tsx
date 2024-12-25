@@ -143,8 +143,9 @@ export default function Filter(props: ProductProps) {
                     ({product.reviews} reviews)
                   </span>
                 </div>
-                <div className="text-base font-semibold mb-4">
-                  ${product.price.toFixed(2)}
+                <div className="text-base font-semibold mb-4 gap-3">
+                  {product.price.toFixed(2)}
+                  <span className="px-2">تومن</span>
                 </div>
                 <Button
                   className="mt-auto bg-[#ed4444] hover:bg-[#d63c3c] text-white"
@@ -217,12 +218,12 @@ export default function Filter(props: ProductProps) {
               onValueChange={(value) => handleFilterChange("priceRange", value)}
             />
             <div className="flex justify-between text-sm text-muted-foreground mt-2">
-              <span>${selectedFilters.priceRange[0]}</span>
-              <span>${selectedFilters.priceRange[1]}</span>
+              <span>تومن{selectedFilters.priceRange[1]}</span>
+              <span>تومن{selectedFilters.priceRange[0]}</span>
             </div>
           </div>
           <div>
-            <h3 className="text-base font-medium mb-2">Rating</h3>
+            <h3 className="text-base font-medium mb-2">امتیاز</h3>
             <div className="grid gap-2">
               {[2, 3, 4].map((rating) => (
                 <Label
