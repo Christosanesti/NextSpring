@@ -4,6 +4,10 @@
  * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
  */
 "use client";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
@@ -26,12 +30,45 @@ import {
 } from "@/components/ui/select";
 import BreadCrumbCheckOut from "@/components/ui/BreadCrumbCheckOut";
 import React from "react";
+import { Form, FormField, FormItem, FormMessage } from "@/components/ui/form";
+import { FormControl, FormLabel } from "@mui/material";
+
+const formSchema = z.object({
+  name: z
+    .string()
+    .min(2, { message: "نام میباست حداقل ۲ حرف باشد!" })
+    .max(50, { message: "نام میباست حداکثر ۵۰ حرف باشد!" }),
+  lastName: z
+    .string()
+    .min(2, { message: "نام خانوادگی میبایست حداقل ۲ حرف باشد!" })
+    .max(50, { message: "نام خانوادگی میبایست حداکثر ۵۰ حرف باشد!" }),
+  email: z.string().email({ message: "ایمیل معتبر نمی باشد!" }),
+  phone: z.string(),
+  address: z
+    .string()
+    .min(10, { message: "آدرس میبایست حداقل ۱۰ حرف باشد!" })
+    .max(250, { message: "آدرس میبایست حد اکثر ۲۵۰ حرف باشد!" }),
+});
 
 export default function Component() {
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-    console.log("handleSubmit");
-  };
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+      lastName: "",
+      phone: "",
+      email: "",
+      address: "",
+    },
+  });
+
+  // 2. Define a submit handler.
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    // Do something with the form values.
+    // ✅ This will be type-safe and validated.
+    console.log(values);
+  }
+
   return (
     <React.Fragment>
       <BreadCrumbCheckOut />
@@ -125,75 +162,133 @@ export default function Component() {
               </div>
             </CardContent>
           </Card>
-
           <Card>
-            <form onSubmit={handleSubmit}>
-              <CardHeader>
-                <CardTitle>
-                  <span className="font-bold text-[#db4444] flex " dir="rtl">
-                    <span className="border-[8px] gap-10 border-[#db4444] rounded-sm mx-2 h-7"></span>
-                    <span className="py-2">ارسال و پرداخت</span>
-                  </span>
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 ">
-                  <div className="space-y-2">
-                    <Label htmlFor="name">نام</Label>
-                    <Input id="name" placeholder="ننه مریم" />
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)}>
+                <CardHeader>
+                  <CardTitle>
+                    <span className="font-bold text-[#db4444] flex " dir="rtl">
+                      <span className="border-[8px] gap-10 border-[#db4444] rounded-sm mx-2 h-7"></span>
+                      <span className="py-2">ارسال و پرداخت</span>
+                    </span>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 ">
+                    <div className="space-y-2">
+                      <FormField
+                        control={form.control}
+                        name="name"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>نام</FormLabel>
+                            <FormControl>
+                              <Input placeholder="ننه" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <FormField
+                        control={form.control}
+                        name="lastName"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>نام خانوادگی</FormLabel>
+                            <FormControl>
+                              <Input placeholder="مریم" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <FormField
+                        control={form.control}
+                        name="email"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>ایمیل</FormLabel>
+                            <FormControl>
+                              <Input
+                                placeholder="nane@maryam.com"
+                                {...field}
+                                dir="ltr"
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <FormField
+                        control={form.control}
+                        name="phone"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>تلفن</FormLabel>
+                            <FormControl>
+                              <Input
+                                placeholder="09121234567"
+                                {...field}
+                                dir="ltr"
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="email" dir="rtl">
-                      ایمیل
-                    </Label>
-                    <Input
-                      id="email"
-                      dir="ltr"
-                      type="email"
-                      placeholder="john@example.com"
+                    <FormField
+                      control={form.control}
+                      name="address"
+                      render={({ field }) => (
+                        <FormItem className="flex flex-col">
+                          <FormLabel>نشانی</FormLabel>
+                          <FormControl>
+                            <Textarea
+                              placeholder="نشانی کامل منزل"
+                              className="resize-none w-full flex"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
                     />
                   </div>
-                  <div className="space-y-2" dir="ltr">
-                    <Label htmlFor="phone">تلفن</Label>
-                    <Input
-                      id="phone"
-                      type="phone"
-                      placeholder="0912-555-1212"
-                    />
+                  <div className="space-y-2">
+                    <Label htmlFor="payment">Payment Method</Label>
+                    <Select id="payment" dir="rtl">
+                      <SelectTrigger>
+                        <SelectValue placeholder="روش پرداخت" />
+                      </SelectTrigger>
+                      <SelectContent dir="rtl">
+                        <SelectItem value="credit-card text-right">
+                          ملی کارت
+                        </SelectItem>
+                        <SelectItem value="paypal">زرین پال</SelectItem>
+                        <SelectItem value="apple-pay">ملت کارت</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="address">آدرس</Label>
-                  <Textarea
-                    id="address"
-                    placeholder="استان - شهر - خیابان - کوچه - ساختمان - پلاک - واحد "
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="payment">Payment Method</Label>
-                  <Select id="payment" dir="rtl">
-                    <SelectTrigger>
-                      <SelectValue placeholder="روش پرداخت" />
-                    </SelectTrigger>
-                    <SelectContent dir="rtl">
-                      <SelectItem value="credit-card text-right">
-                        ملی کارت
-                      </SelectItem>
-                      <SelectItem value="paypal">زرین پال</SelectItem>
-                      <SelectItem value="apple-pay">ملت کارت</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </CardContent>
-              <CardFooter>
-                <Button
-                  type="submit"
-                  className="w-full bg-[#ed4444] hover:bg-[#de4444]"
-                >
-                  Place Order
-                </Button>
-              </CardFooter>
-            </form>
+                </CardContent>
+                <CardFooter>
+                  <Button
+                    type="submit"
+                    className="w-full bg-[#ed4444] hover:bg-[#de4444]"
+                  >
+                    تایید سفارش
+                  </Button>
+                </CardFooter>
+              </form>
+            </Form>
           </Card>
         </div>
       </main>
