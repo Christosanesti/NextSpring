@@ -1,5 +1,3 @@
-/******\******* ✨ Codeium Command ⭐ ******\*******/
-
 # Private License
 
 This software is private and confidential. It is not open source. You may not use, modify, or distribute this software in any way. This software is the property of its creators and is protected by copyright and other intellectual property laws.
