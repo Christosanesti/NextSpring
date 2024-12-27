@@ -50,7 +50,7 @@ const formSchema = z.object({
     .max(250, { message: "آدرس میبایست حد اکثر ۲۵۰ حرف باشد!" }),
 });
 
-export default function Component() {
+export default function CheckOut() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
